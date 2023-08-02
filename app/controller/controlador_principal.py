@@ -1,13 +1,13 @@
 from views.vista_principal import VistaPrincipal
-from models.local import Local
+from models.local import Destino
 from models.ubicacion import Ubicacion
 from PIL import Image, ImageTk
 
 class ControladorPrincipal:
     def __init__(self, root):
         self.vista = VistaPrincipal(root, self.seleccionar_local, seleccionar_ubicacion)
-        self.locales = Local.cargar_locales("app/data/locales.json")
-        self.ubicaciones = Ubicacion.cargar_ubicaciones("app/data/ubicaciones.json")
+        self.locales = Destino.cargar_locales("./data/locales.json")
+        self.ubicaciones = Ubicacion.cargar_ubicaciones("./data/ubicaciones.json")
         self.marcadores = []
         self.imagenes = []
 
@@ -21,13 +21,15 @@ class ControladorPrincipal:
         
     def cargar_imagenes(self):
         for local in self.locales:
-            imagen = ImageTk.PhotoImage(Image.open(f"app/views/images/{local.imagen}").resize((200, 200)))
+            imagen = ImageTk.PhotoImage(Image.open(f"./views/images/{local.imagen}").resize((350, 350)))
             self.imagenes.append(imagen)
 
     def cargar_marcadores(self):
         for ubicacion, local in zip(self.ubicaciones, self.locales):
             imagen = self.imagenes[ubicacion.id - 1]
-            marcador = self.vista.agregar_marcador_mapa(ubicacion.latitud, ubicacion.longitud, local.nombre, imagen)
+            latitud, longitud= ubicacion.coordenadas
+
+            marcador = self.vista.agregar_marcador_mapa(latitud, longitud, local.nombre, imagen)
             marcador.hide_image(True)
             self.marcadores.append(marcador)
 
@@ -37,7 +39,7 @@ class ControladorPrincipal:
         # Obtiene el local seleccionado
         local_seleccionado = self.locales[indice_seleccionado[0]]
         
-        ubicacion_seleccionada = Ubicacion(0, 0, 0, "")
+        #ubicacion_seleccionada = Ubicacion(0, 0, 0, "")
         
         # Busca la ubicación correspondiente al local seleccionado
         for ubicacion in self.ubicaciones:
@@ -46,9 +48,10 @@ class ControladorPrincipal:
                 break
         
         # Centra el mapa en la ubicación seleccionada
-        self.vista.mapa.set_position(ubicacion_seleccionada.latitud, ubicacion_seleccionada.longitud)
+        latitud, longitud= ubicacion_seleccionada.coordenadas
+        self.vista.mapa.set_position(latitud, longitud)
 
-        print(f"Latitud: {ubicacion_seleccionada.latitud}, Longitud: {ubicacion_seleccionada.longitud}")
+        print(f"Latitud: {latitud}, Longitud: {longitud}")
 
 def seleccionar_ubicacion(marcador):
     if marcador.image_hidden is True:

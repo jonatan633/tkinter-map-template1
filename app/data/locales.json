@@ -1,32 +1,51 @@
 [
     {
         "nombre": "El Buen Gusto",
+        "id_local" : 1,
+        "tipo_cosina" : "Italiana",
+        "ingredientes" : ["harina","sal","agua"],
+        "precio_min": 500.00,
+        "precio_max": 1500.00,
+        "popularidad": 10.00,
+        "disponibilidad" : true,
         "imagen": "image_1.png",
         "id_ubicacion": 1
     },
     {
         "nombre": "La Monumental",
+        "id_local" : 2,
+        "tipo_cosina" : "Japonesa",
+        "ingredientes" : ["salsa de soja","pescado","arroz"],
+        "precio_min": 600.00,
+        "precio_max": 1600.00,
+        "popularidad": 9.50,
+        "disponibilidad" : false,
         "imagen": "image_2.png",
         "id_ubicacion": 2
     },
     {
-        "nombre": "La 12",
+        "nombre": "La Vieja Estacion",
+        "id_local" : 3,
+        "tipo_cosina" : "Regional",
+        "ingredientes" : ["Carne","sal","tomate"],
+        "precio_min": 700.00,
+        "precio_max": 1700.00,
+        "popularidad": 9.00,
+        "disponibilidad" : true,
         "imagen": "image_3.png",
         "id_ubicacion": 3
     },
     {
         "nombre": "Donatello",
+        "id_local" : 4,
+        "tipo_cosina" : "Italiana",
+        "ingredientes" : ["harina","sal","agua"],
+        "precio_min": 800.00,
+        "precio_max": 1800.00,
+        "popularidad": 8.50,
+        "disponibilidad" : false,        
         "imagen": "image_4.png",
         "id_ubicacion": 4
-    },
-    {
-        "nombre": "Lo del Negro Copa",
-        "imagen": "image_5.png",
-        "id_ubicacion": 5
-    },
-    {
-        "nombre": "Pizza Mara",
-        "imagen": "image_6.png",
-        "id_ubicacion": 6
     }
+    
 ]
