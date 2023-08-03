@@ -24,10 +24,10 @@ class ControladorPrincipal:
             imagen = ImageTk.PhotoImage(Image.open(f"./views/images/{local.imagen}").resize((350, 350)))
             self.imagenes.append(imagen)
 
-    def cargar_marcadores(self):
+    def cargar_marcadores(self):    
         for ubicacion, local in zip(self.ubicaciones, self.locales):
             imagen = self.imagenes[ubicacion.id - 1]
-            latitud, longitud= ubicacion.coordenadas
+            latitud, longitud = ubicacion.coordenadas
             marcador = self.vista.agregar_marcador_mapa(latitud, longitud, local.nombre, imagen)
             marcador.hide_image(True)
             self.marcadores.append(marcador)
@@ -38,7 +38,7 @@ class ControladorPrincipal:
         # Obtiene el local seleccionado
         local_seleccionado = self.locales[indice_seleccionado[0]]
         
-        #ubicacion_seleccionada = Ubicacion(0, 0, 0, "")
+        ubicacion_seleccionada = Ubicacion(0, [0, 0], "")
         
         # Busca la ubicación correspondiente al local seleccionado
         for ubicacion in self.ubicaciones:
@@ -47,10 +47,10 @@ class ControladorPrincipal:
                 break
         
         # Centra el mapa en la ubicación seleccionada
-        latitud, longitud= ubicacion_seleccionada.coordenadas
-        self.vista.mapa.set_position(latitud, longitud)
+        latitud,longitud= ubicacion_seleccionada.coordenadas
+        self.vista.mapa.set_position(latitud,longitud)
 
-        print(f"Las coordenadas son : Latitud: {latitud}, Longitud: {longitud}")
+        print(f"Las coordenadas son: Latitud: {latitud}, Longitud: {longitud}")
 
 def seleccionar_ubicacion(marcador):
     if marcador.image_hidden is True:
